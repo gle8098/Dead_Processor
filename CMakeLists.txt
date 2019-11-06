@@ -3,7 +3,7 @@ project(Dead_Processor)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(COMMON_SOURCE utility/FileHelper.cpp source/friday_asm_lang.cpp source/FridayAsmWriter.cpp source/assembler_inside_facade.cpp
+set(COMMON_SOURCE source/utility/FileHelper.cpp source/friday_asm_lang.cpp source/FridayAsmWriter.cpp source/assembler_inside_facade.cpp
         source/ListingGenerator.cpp source/Emulator.cpp)
 
 add_executable(friday-asm source/assembler.cpp source/assembler.hpp ${COMMON_SOURCE})
