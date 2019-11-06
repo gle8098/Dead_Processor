@@ -1,7 +1,7 @@
 #include "Emulator.hpp"
 #include "friday_asm_lang.hpp"
 #include <cstring>
-#include "../utility/BytesHelper.hpp"
+#include "utility/BytesHelper.hpp"
 #include <cstdio>
 
 using namespace FridayArch;

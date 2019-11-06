@@ -1,6 +1,6 @@
 #include "friday_asm_lang.hpp"
 #include "Emulator.hpp"
-#include "../utility/BytesHelper.hpp"
+#include "utility/BytesHelper.hpp"
 #include <cstdio>
 #ifndef NDEBUG
     #include <cassert>

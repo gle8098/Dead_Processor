@@ -1,7 +1,7 @@
 #pragma once
 
 #include "assembler.hpp"
-#include "../utility/StringHashTable.hpp"
+#include "utility/StringHashTable.hpp"
 #include "friday_asm_lang.hpp"
 
 std::vector<std::string_view> SplitLine(const char* line, int& index);

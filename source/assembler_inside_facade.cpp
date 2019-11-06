@@ -1,7 +1,7 @@
 #include <cassert>
 #include <cstdarg>
 #include "assembler_inside_facade.hpp"
-#include "../utility/FileHelper.hpp"
+#include "utility/FileHelper.hpp"
 
 using namespace FridayArch;
 

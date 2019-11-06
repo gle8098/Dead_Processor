@@ -1,6 +1,6 @@
 #include <cstdio>
 #include "objdump.hpp"
-#include "../utility/FileHelper.hpp"
+#include "utility/FileHelper.hpp"
 #include "ListingGenerator.hpp"
 
 #ifdef FRIDAY_OBJDUMP_MAIN

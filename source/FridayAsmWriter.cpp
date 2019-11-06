@@ -1,8 +1,8 @@
 #include "assembler_inside_facade.hpp"
-#include "../utility/FileHelper.hpp"
+#include "utility/FileHelper.hpp"
 #include <cstring>
 #include <cassert>
-#include "../utility/BytesHelper.hpp"
+#include "utility/BytesHelper.hpp"
 
 using namespace FridayArch;
 
@@ -41,7 +41,7 @@ bool FridayAsmWriter::WriteInstruction(const std::vector<std::string_view> &args
     Instruction* inst = FindInstructionBySignature(args[0], types.size(), types.data());
     if (inst == nullptr) {
         loc->PrintCompileMessage("error: undefined instruction");
-        printf("\t%.*s  arg_types[", args[0].size(), args[0].data());
+        printf("\t%.*s  arg_types[", static_cast<int>(args[0].size()), args[0].data());
         for (auto type : types) {
             printf("%s, ", GetInstructionArgumentName(type));
         }

@@ -30,9 +30,14 @@
 *.exe
 *.out
 *.app
+friday-*
 
-# Cmake temp folders
+# Cmake files
 cmake-build-debug
+CMakeCache.txt
+CMakeFiles
+*.cmake
+Makefile
 
 # Friday compiled
 *.friday

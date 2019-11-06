@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <cstring>
 #include "Emulator.hpp"
-#include "../utility/FileHelper.hpp"
+#include "utility/FileHelper.hpp"
 #include "friday_asm_lang.hpp"
 
 using namespace FridayArch;

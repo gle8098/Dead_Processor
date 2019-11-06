@@ -1,6 +1,6 @@
 #include "ListingGenerator.hpp"
 #include "friday_asm_lang.hpp"
-#include "../utility/BytesHelper.hpp"
+#include "utility/BytesHelper.hpp"
 
 using namespace FridayArch;
 using namespace BytesHelper;
