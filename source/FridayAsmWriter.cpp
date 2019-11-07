@@ -61,7 +61,7 @@ FridayArch::InstructionArgument FridayAsmWriter::ParseAndCompileArgument(const s
     int value_int = strtol(arg_.c_str(), &bad_ptr, 0);
     if (*bad_ptr == '\0') {
         // It is int
-        WriteToBuffer(static_cast<friday_constant_t>(value_int));
+        WriteToBuffer(*reinterpret_cast<friday_constant_t*>(value_int));
         return CONSTANT;
     }
 
