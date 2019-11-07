@@ -144,7 +144,7 @@ FRIDAY_INST(pop,  0x03, { REGISTER })  { emu->regs[BytesAs<uint8_t>(emu->get_arg
                                          /* either would work with float */ }
 FRIDAY_INST(in,   0x04, {})            { emu->sp -= 4; scanf("%d", &BytesAs<int>(emu->get_stack_ptr())); }
 FRIDAY_INST(out,  0x05, {})            { printf("%d\n", emu->pop_int()); }
-FRIDAY_INST(outf, 0x06, {})            { printf("%f\n", emu->pop_float()); }
+FRIDAY_INST(outf, 0x06, {})            { printf("%g\n", emu->pop_float()); }
 // dep (fully: depart) = push ip
 FRIDAY_INST(dep,  0x07, {})            { InstDepart(emu); }
 // call = push ip && jmp LABEL
