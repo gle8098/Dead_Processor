@@ -2,11 +2,13 @@
 #include "objdump.hpp"
 #include "utility/FileHelper.hpp"
 #include "ListingGenerator.hpp"
+#include "friday_asm_lang.hpp"
 
 #ifdef FRIDAY_OBJDUMP_MAIN
 int main(int argc, char** argv) {
     if (argc != 2) {
         PrintObjdumpHelp();
+        return 0;
     }
     Objdump(argv[1]);
     return 0;
@@ -19,11 +21,21 @@ void PrintObjdumpHelp() {
 }
 
 void Objdump(const char *filename) {
-    std::string file_ = FileHelper::ReadFileFullyInBinary(filename);
+    std::string file_;
+    try {
+        file_ = FileHelper::ReadFileFullyInBinary(filename);
+    } catch (const std::exception& exc) {
+        FileHelper::PrintErrorWorkingWithFile(filename, "reading", exc);
+        return;
+    }
     const char* file = file_.c_str();
 
-    printf("Objdump for file %s\n\n", filename);
+    if (!FridayArch::CheckForFRDY(file)) {
+        printf("File '%s' is not a .friday executable\n", filename);
+        return;
+    }
 
+    printf("Objdump for file %s\n\n", filename);
     ListingGenerator listing(stdout);
     int file_size = file_.size();
 
@@ -37,7 +49,7 @@ void Objdump(const char *filename) {
         }
 
         if (bytes_read < 0) {
-            printf("<file_start+%04x> error reading instruction or header. Abort", listing.GetOffset());
+            printf("<file_start+%04x> error reading instruction or header. Abort\n", listing.GetOffset());
             return;
         }
 

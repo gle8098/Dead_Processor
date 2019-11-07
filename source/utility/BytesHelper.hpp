@@ -15,6 +15,10 @@ namespace BytesHelper {
     inline const T& BytesAs(const char* bytes, int buffer_offset = 0) {
         return *reinterpret_cast<const T*>(bytes + buffer_offset);
     }
+    template <typename T>
+    inline T& BytesAs(char* bytes, int buffer_offset = 0) {
+        return *reinterpret_cast<T*>(bytes + buffer_offset);
+    }
 
     template <typename T>
     inline const char* AsBytes(const T& value) {

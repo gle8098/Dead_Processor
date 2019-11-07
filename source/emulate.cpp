@@ -24,12 +24,17 @@ void PrintEmulatorHelp() {
 }
 
 void Emulate(const char *filename, bool debug_mode) {
-    std::string file = FileHelper::ReadFileFullyInBinary(filename);
-    for (int i = 0; i < HEADER_ASM_VER_OFFSET; ++i) {
-        if (FRDY[i] != file[i]) {
-            printf("error: file '%s' is not a .friday executable\n", filename);
-            return;
-        }
+    std::string file;
+    try {
+        file = FileHelper::ReadFileFullyInBinary(filename);
+    } catch (const std::exception& exc) {
+        FileHelper::PrintErrorWorkingWithFile(filename, "reading", exc);
+        return;
+    }
+
+    if (!CheckForFRDY(file.c_str())) {
+        printf("error: file '%s' is not a .friday executable\n", filename);
+        return;
     }
 
     Emulator emu;

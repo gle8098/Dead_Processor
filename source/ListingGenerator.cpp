@@ -14,7 +14,7 @@ void PrintRawBytesAndAlign(FILE* outstream, const char* bytes, int length) {
         if (i % 2 == 0 && i > 0) {
             fprintf(outstream, " ");
         }
-        fprintf(outstream, "%02x", bytes[i]);
+        fprintf(outstream, "%02hhx", bytes[i]);
     }
 
     int chars_printed = 2 * length + (length - 1) / 2;  // Количество уже выведенных символов
@@ -41,9 +41,9 @@ int ListingGenerator::PrintInstruction(const char *code, int code_length) {
 
         switch (inst->args[i]) {
             case CONSTANT:
-                // todo: print float
                 static_assert(sizeof(int32_t) == sizeof(friday_constant_t));
-                fprintf(outstream, " %d", ReadFromBytes<int32_t>(code));
+                fprintf(outstream, " {int: %d, float: %f}", ReadFromBytes<int32_t>(code),
+                        ReadFromBytes<float>(code));
                 break;
             case REGISTER:
                 fprintf(outstream, " r%d", ReadFromBytes<friday_reg_t>(code));
@@ -67,10 +67,8 @@ int ListingGenerator::PrintHeader(const char *code, int code_length) {
     }
 
     // Check FRDY
-    for (int i = 0; i < HEADER_ASM_VER_OFFSET; ++i) {
-        if (FRDY[i] != code[i]) {
-            return -1;
-        }
+    if (!CheckForFRDY(code)) {
+        return -1;
     }
 
     auto version = ReadFromBytes<int16_t>(code + HEADER_ASM_VER_OFFSET);

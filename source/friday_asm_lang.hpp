@@ -34,7 +34,7 @@ const unsigned int MAX_INSTRUCTION_VALUE = TwoInPowerOf(sizeof(friday_inst_t)) -
 const unsigned int MAX_CONSTANT_VALUE = TwoInPowerOf(sizeof(friday_constant_t)) - 1;
 const unsigned int MAX_ADDRESS_VALUE = TwoInPowerOf(sizeof(friday_address_t)) - 1;
 
-const friday_reg_t DEFAULT_REG_COUNT = 4;  // Количество регистров, зарезервированных по умолчанию
+const friday_reg_t DEFAULT_REG_COUNT = 8;  // Количество регистров, зарезервированных по умолчанию
 
 class Emulator;
 
@@ -47,6 +47,9 @@ typedef enum A {
 
 const char* GetInstructionArgumentName(InstructionArgument value);
 size_t GetInstructionArgumentSize(InstructionArgument value);
+
+// Проверяет, что первые символы text совпадают с FRDY
+bool CheckForFRDY(const char* text);
 
 struct Instruction {
     const char* const name;

@@ -154,10 +154,16 @@ bool AssemblyAndLink(const AssemblerArgs &args) {
     writer.WriteHeader();
 
     for (char* filename : args.input_files) {
-        std::string _file = FileHelper::ReadFileFully(filename);
-        const char* file = _file.c_str();
-        loc.SetFile(filename);
+        std::string file_;
+        try {
+            file_ = FileHelper::ReadFileFully(filename);
+        } catch (const std::exception& exc) {
+            FileHelper::PrintErrorWorkingWithFile(filename, "reading", exc);
+            return false;
+        }
 
+        const char* file = file_.c_str();
+        loc.SetFile(filename);
         CompileAndLinkFile(file, loc, writer, false);
     }
 

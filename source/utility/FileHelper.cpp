@@ -33,3 +33,9 @@ void FileHelper::WriteFileInBinary(const char *filename, const std::vector<char>
     file.exceptions(std::ios::badbit);
     file.write(bytes.data(), bytes.size());
 }
+
+void FileHelper::PrintErrorWorkingWithFile(const char *filename, const char *action_with_file,
+        const std::exception& exc) {
+    printf("Error while %s file '%s'. Check the file exists and is not a directory\n", action_with_file, filename);
+    printf("Exception's 'what()': %s\n", exc.what());
+}

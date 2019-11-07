@@ -69,7 +69,7 @@ FridayArch::InstructionArgument FridayAsmWriter::ParseAndCompileArgument(const s
     float value_float = strtof(arg_.c_str(), &bad_ptr);
     if (*bad_ptr == '\0') {
         // It is float
-        WriteToBuffer(static_cast<friday_constant_t>(value_float));
+        WriteToBuffer(*reinterpret_cast<friday_constant_t*>(&value_float));
         return CONSTANT;
     }
 
@@ -108,7 +108,11 @@ FridayArch::InstructionArgument FridayAsmWriter::ParseAndCompileArgument(const s
 }
 
 void FridayAsmWriter::WriteToFile(const char *filename) const {
-    FileHelper::WriteFileInBinary(filename, bytecode);
+    try {
+        FileHelper::WriteFileInBinary(filename, bytecode);
+    } catch (const std::exception& exc) {
+        FileHelper::PrintErrorWorkingWithFile(filename, "writing to", exc);
+    }
 }
 
 FridayArch::friday_address_t FridayAsmWriter::GetCurrentCodeOffset() const {

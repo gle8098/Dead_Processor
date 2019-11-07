@@ -57,10 +57,10 @@ AssemblerArgs ParseAssemblerArgs(int argc, char **argv) {
 }
 
 void PrintAssemblerHelp() {
-    printf("friday-asm [-o <out_filename>] <files>\n"
+    printf("friday-asm [-o <out_filename>] <main_file> [other files...]\n"
            "Assembly and link .friday program\n"
            "-o : specify output filename, default is \"a.friday\"\n"
-           "<files> : files to assembly\n");
+           "<main_file>, [other files] : files to assembly. Code execution will start from first instruction of <main_file>\n");
 }
 //#################################################################################################
 
