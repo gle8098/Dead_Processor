@@ -1,7 +1,6 @@
     .friday_asm
 
-    in_f
-    cf2i # read float and convert it to int in order to demonstrate it is working )))
+    in
     call factorial
     out
     end

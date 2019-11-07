@@ -17,4 +17,10 @@
     mulf
     outf
 
+    push r0
+    cf2i
+    in
+    add
+    out
+
     end
